@@ -2,26 +2,25 @@ RF Arduino API Commands
 
 
 
-LED Blink
+--LED Methods--
+
+Blink an LED
+module, method, pin, blink count, milliseconds
+
 led,blink,13,4,500
 
-led,blink,10,4,500
 
-	
+Blink LED by Custom Pattern
+module, method, pin, count, pattern with - seperator
 
-
-
-
-LED Custom Blink
-
-led,customBlink,7,10,100
-
-
-LED Toggle
-led,togglePins,0,7-10-13,on
+led,customBlink,7,10,100-200
 
 
 
-Button
-button,setup,0,12,2-3
 
+--Button Methods--
+
+Setup button for use
+module, method, empty param (use 0), empty param (use 0), pins
+
+button,setup,0,0,2-3
