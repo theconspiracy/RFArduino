@@ -1,6 +1,7 @@
 
 // Buffer for the incoming data
 char inData[100];
+
 // Buffer for the parsed data chunks
 char *inParse[100];
 
@@ -9,13 +10,14 @@ String inString = "";
 
 // Incoming data id
 int index = 0;
+
 // Read state of incoming data
 boolean stringComplete = false;
 
 String pins = "";
 
 //Debug mode
-int debug = 0;
+int debug = 1;
 
 void setup()  
 {  
@@ -76,20 +78,24 @@ void ParseSerialData()
     String param1 = inParse[3];
     String param2 = inParse[4];
     
-    if(debug == 1){
+    if(debug == 1)
+    {
       Serial.println(module);
     }
     
-    if (module.equals("led")) {
+    if (module.equals("led")) 
+    {
       led(command, pin, param1, param2);
     }
     
-    if (module.equals("button")) {
+    if (module.equals("button")) 
+    {
+      Serial.println("PIN");
+      Serial.println(pin);
       button(command, pin, param1, param2);
     }
 
   }
- 
 }
 
 void serialEvent() 

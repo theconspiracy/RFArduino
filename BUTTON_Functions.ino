@@ -10,18 +10,20 @@ char pressArray[0];
 
 void button(String command, int pin, String param1, String param2)
 {
-  if(debug == 1){
+  if(debug == 1)
+  {
     Serial.println("led hit");
     Serial.println(param2);
   }
   
-  if (command.equals("setup")) {
-    if(debug == 1){
+  if (command.equals("setup")) 
+  {
+    if(debug == 1)
+    {
       Serial.println("setup hit");
     }
     button_setup(pin, param1, param2); 
   }
-  
 }
 
 
@@ -34,7 +36,7 @@ void button_setup(int pin, String param1, String param2)
   String  message = param2; // holds text not yet split
   int     commaPosition;  // the position of the next comma in the string
           
-  pins = param2;                
+  pins = String(pin);//.toString();                
   pressed = 0;
   
   do
@@ -43,7 +45,7 @@ void button_setup(int pin, String param1, String param2)
       if(commaPosition != -1)
       {
           if(debug == 1){
-            Serial.println("Setup Pin");
+            Serial.println("Setup Pin 1");
             Serial.println( message.substring(0,commaPosition));
           }
                     
@@ -51,16 +53,19 @@ void button_setup(int pin, String param1, String param2)
           pinMode(buttonPin, INPUT);     
           message = message.substring(commaPosition+1, message.length());
       }
-      else
+      else 
       { 
-        if(debug == 1){                
-          Serial.println("Setup Pin");
-          Serial.println( message.substring(0,commaPosition));
+        if(debug == 1)
+        {                
+          Serial.println("Setup Pin 2");
+          //Serial.println( message.substring(0,commaPosition));
+          Serial.println(pin); 
         }
-        int buttonPin = message.substring(0,commaPosition).toInt();
-        pinMode(buttonPin, INPUT);     
-        message = message.substring(commaPosition+1, message.length());
-                   
+       
+        int buttonPin = pin;//essage.substring(0,commaPosition).toInt();
+        pinMode(pin, INPUT);   
+       
+        message = message.substring(pin, message.length());
       }
    }
    while(commaPosition >=0);
@@ -71,7 +76,6 @@ void button_checkState()
 {
   String  pinStore = pins; // holds text not yet split
   int     sepPosition;  // the position of the next comma in the string
-          
   do
   {
       sepPosition = pinStore.indexOf('-');
@@ -80,28 +84,34 @@ void button_checkState()
           int buttonPin = pinStore.substring(0,sepPosition).toInt();
            buttonState = digitalRead(buttonPin);
 
-          if (buttonState == HIGH) {   
-            if(pressArray[buttonPin] < 1){
+          if (buttonState == HIGH) 
+          {   
+            if(pressArray[buttonPin] < 1)
+            {
                   String output = "b";
                   output.concat(buttonPin);
                   Serial.println(output);
                 pressArray[buttonPin]++;
             }
           }
-          if(buttonState == LOW) {
+          if(buttonState == LOW) 
+          {
             pressArray[buttonPin] = 0;
           }
           pinStore = pinStore.substring(sepPosition+1, pinStore.length());
       }
       else
       { 
+        //Serial.println("Pin Store");
+        //Serial.println(pinStore);
          int buttonPin = pinStore.substring(0,sepPosition).toInt();
            buttonState = digitalRead(buttonPin);
 
-          if (buttonState == HIGH) {   
-            
-            
-            if(pressArray[buttonPin] < 1){
+          if (buttonState == HIGH) 
+          {   
+              
+            if(pressArray[buttonPin] < 1)
+            {
                   String output = "b";
                   output.concat(buttonPin);
                   Serial.println(output);
@@ -109,7 +119,8 @@ void button_checkState()
                 pressArray[buttonPin]++; 
             }
           }
-          if(buttonState == LOW) {
+          if(buttonState == LOW) 
+          {
             pressArray[buttonPin] = 0;
           }
           pinStore = pinStore.substring(sepPosition+1, pinStore.length());
