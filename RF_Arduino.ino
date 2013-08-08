@@ -1,4 +1,7 @@
 
+//APP NAME
+String appName = "Arduino";
+
 // Buffer for the incoming data
 char inData[100];
 
