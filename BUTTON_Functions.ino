@@ -112,7 +112,9 @@ void button_checkState()
               
             if(pressArray[buttonPin] < 1)
             {
-                  String output = appName;
+                  String output = apiKey;
+                  output.concat("-");
+                  output.concat(appName);
                   output.concat("-b-");
                   output.concat(buttonPin);
                   Serial.println(output);

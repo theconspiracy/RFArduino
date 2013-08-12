@@ -2,6 +2,8 @@
 //APP NAME
 String appName = "Arduino";
 
+String apiKey = "1122";
+
 // Buffer for the incoming data
 char inData[100];
 
